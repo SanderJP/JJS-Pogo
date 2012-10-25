@@ -11,6 +11,10 @@ public class JJSPogoActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
+        // Set the current context (this) in the 'singleton' contextHolder.
+        ContextHolder ch = ContextHolder.getInstance();
+        ch.setContext(this);
+        
         Intent i = new Intent(this, GamePogo.class);
         startActivity(i);
     }

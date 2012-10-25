@@ -11,6 +11,10 @@ public class GamePogo extends Activity {
         super.onCreate(savedInstanceState);
         
         setContentView(new GameView(this));
+        
+        // Test - Start GameInput listener
+        GameInput gi = new GameInput();
+        
     }
 
 }
