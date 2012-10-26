@@ -12,9 +12,6 @@ public class GamePogo extends Activity {
         
         setContentView(new GameView(this));
         
-        // Test - Start GameInput listener
-        GameInput gi = new GameInput();
-        
     }
 
 }

@@ -18,9 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".GamePogo"></activity>
-        <activity android:name=".GameView"></activity>
-        <activity android:name=".Tile"></activity>
+        <activity android:name=".GamePogo" android:screenOrientation="landscape"></activity>
+        <activity android:name=".GameView"></activity> <!--  GameView is geen Activity... -->
+        <activity android:name=".Tile"></activity><!--  Tile is geen Activity... -->
     </application>
 
 </manifest>

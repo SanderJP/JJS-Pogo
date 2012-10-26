@@ -40,4 +40,12 @@ public class Tile {
 		// change color
 		_color = c;
 	}
+	
+	public int getX(){
+		return _posX;
+	}
+	
+	public int getY(){
+		return _posY;
+	}
 }

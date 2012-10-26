@@ -7,13 +7,18 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.text.method.MovementMethod;
 import android.util.Log;
 
 public class GameInput implements SensorEventListener {
 
+	private Player _player;
 	private SensorManager sm;
 	
-	public GameInput() {
+	public GameInput(Player playerToControll) {
+		
+		// Set player to controll
+		_player = playerToControll;
 		
 		// Get main context
 		ContextHolder ch = ContextHolder.getInstance();
@@ -39,10 +44,27 @@ public class GameInput implements SensorEventListener {
         int movementX = (int) a;
         int movementY = (int) b;
         
+        // Determine direction
+        int direction;
+        if(movementX > 1){
+        	direction = 1; // Left
+        } else if (movementX < -1){
+        	direction = 2; // Right 
+        } else if (movementY > 1){
+        	direction = 3; // Up
+        } else if (movementY < -1){
+        	direction = 4; // Down
+        } else {
+        	direction = -1; // None
+        }
+        
         // Change player direction (get user object from singleton or something...)
-        Log.w("Movement", "X: " + movementX);
-        Log.w("Movement", "Y: " + movementY);
-		
+        //Log.w("Movement", "X: " + movementX);
+        //Log.w("Movement", "Y: " + movementY);
+        //Log.w("Movement", "Direction: " + direction);
+        
+        _player.move(direction);
+        
 	}
 	
 	@Override
