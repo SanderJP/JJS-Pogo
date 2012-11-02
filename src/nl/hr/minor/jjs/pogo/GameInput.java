@@ -14,6 +14,8 @@ public class GameInput implements SensorEventListener {
 
 	private Player _player;
 	private SensorManager sm;
+	private long lastMoveTime = System.currentTimeMillis();
+	private long freeToMoveTime;
 	
 	public GameInput(Player playerToControll) {
 		
@@ -30,6 +32,12 @@ public class GameInput implements SensorEventListener {
 	
 	@Override
 	public void onSensorChanged(SensorEvent sensorEvent) {
+		
+		// Prevent this event from running any further if the last move was within 500ms
+		freeToMoveTime = lastMoveTime + 500;
+		if(System.currentTimeMillis() < freeToMoveTime){
+			return;
+		}
 		
 		float a = 0;
 		float b = 0;
@@ -64,6 +72,7 @@ public class GameInput implements SensorEventListener {
         //Log.w("Movement", "Direction: " + direction);
         
         _player.move(direction);
+        lastMoveTime = System.currentTimeMillis();
         
 	}
 	

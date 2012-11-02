@@ -9,10 +9,11 @@ import android.graphics.Rect;
 
 public class Player {
 
-	private int _id;
+	public int _id;
 	private int _teamId;
 	private int _name; // Optional (may be used later)
 	private Map<Integer, Tile> _map;
+	public int _colorFill = Color.GREEN;
 	
 	private int _size = 50;
 	private int _margin = 5;
@@ -21,21 +22,15 @@ public class Player {
 	private int _posY = _size/2;
 	private int _currentTile = 1;
 	
-	private int _color = Color.GREEN;
+	private int _color = Color.BLACK;
 	private Paint _paint = new Paint();
 	
-	public Player(int id, int teamId, Map<Integer, Tile> map){
+	public Player(int id, int teamId, Map<Integer, Tile> map, Integer color){
 		_id = id;
 		_teamId = teamId;
 		_map = map;
+		_colorFill = color;
 	}
-	
-	/*
-	public void moveToTile(int x, int y){
-		_posX = x;
-		_posY = y;
-	}
-	*/
 
 	public void move(int direction){
 		int _tmpOldTile = _currentTile;
@@ -52,7 +47,7 @@ public class Player {
 		
 		// Check if this map tile exists
 		if(_map.containsKey(_currentTile)){
-    		_map.get(_currentTile).setColor(Color.BLUE);
+    		_map.get(_currentTile).setColor(_colorFill);
     		
     		// Change player self
     		int tileX = _map.get(_currentTile).getX();
