@@ -1,6 +1,5 @@
 package nl.hr.minor.jjs.pogo;
 
-import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Map;
 import android.content.Context;
@@ -14,6 +13,8 @@ public class GameView extends View {
 	private int _fieldSize = 7; // = 8 tiles (0-7)
 	private Map<Integer, Tile> _tiles = new Hashtable<Integer, Tile>();
 	private Map<Integer, Player> _playerList = new Hashtable<Integer, Player>();
+	
+	Countdown cd;
 
 	public GameView(Context context) {
 		super(context);
@@ -49,6 +50,12 @@ public class GameView extends View {
         aip1.startAi();
         aip2.startAi();
         aip3.startAi();
+        
+        // Show level countdown
+        cd = new Countdown();
+        
+        // Todo: Generate random 'check-ins' (get points for tiles in your color) and powerups (optional)
+        
 		
 	}
 
@@ -66,6 +73,9 @@ public class GameView extends View {
 	    	// draw player
 			_playerList.get(id).draw(canvas);
 		}
+		
+		// Draw countdown timer
+		cd.draw(canvas);
 		
 		// Invalidate the view (redraw)
 		invalidate();

@@ -17,6 +17,15 @@ public class GameInput implements SensorEventListener {
 	private long lastMoveTime = System.currentTimeMillis();
 	private long freeToMoveTime;
 	
+	// Sensor data
+	private float a; 
+	private float b;
+	
+	// Chaning movement data
+	int movementX;
+	int movementY;
+	int direction;
+	
 	public GameInput(Player playerToControll) {
 		
 		// Set player to controll
@@ -39,21 +48,20 @@ public class GameInput implements SensorEventListener {
 			return;
 		}
 		
-		float a = 0;
-		float b = 0;
-		float c = 0;
+		a = 0;
+		b = 0;
+		//float c = 0;
 		
 		if (sensorEvent.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
 			 a = sensorEvent.values[0];
 			 b = sensorEvent.values[1];
-			 c = sensorEvent.values[2];
+			 //c = sensorEvent.values[2];
 		}
         
-        int movementX = (int) a;
-        int movementY = (int) b;
+        movementX = (int) a;
+        movementY = (int) b;
         
         // Determine direction
-        int direction;
         if(movementX > 1){
         	direction = 1; // Left
         } else if (movementX < -1){
@@ -66,12 +74,14 @@ public class GameInput implements SensorEventListener {
         	direction = -1; // None
         }
         
-        // Change player direction (get user object from singleton or something...)
         //Log.w("Movement", "X: " + movementX);
         //Log.w("Movement", "Y: " + movementY);
         //Log.w("Movement", "Direction: " + direction);
         
+        // Move the player in the correct direction (move will check for collisions)
         _player.move(direction);
+        
+        // Keep track of when this move happened
         lastMoveTime = System.currentTimeMillis();
         
 	}

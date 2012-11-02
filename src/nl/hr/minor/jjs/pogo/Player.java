@@ -60,6 +60,8 @@ public class Player {
     		// Player tries to go out of map bounds; set currenTile back to what it was
     		_currentTile = _tmpOldTile;
     	}
+		
+		// Todo: Optional collision detection between all players
 
 		
 	}
