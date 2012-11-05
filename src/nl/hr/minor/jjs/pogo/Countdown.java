@@ -7,21 +7,21 @@ import android.os.CountDownTimer;
 
 public class Countdown {
 
-	private int gameTime = 90000;
-	private Paint p;
+	private int _gameTime = 90000;
+	private Paint _p;
 	
 	public Countdown() {
 		
-		p = new Paint();
-		p.setColor(Color.WHITE);
-		p.setAlpha(200);
-		p.setTextSize(20);
+		_p = new Paint();
+		_p.setColor(Color.WHITE);
+		_p.setAlpha(200);
+		_p.setTextSize(20);
 		//p.setStyle(style);
 		
-		new CountDownTimer(gameTime, 1000) {
+		new CountDownTimer(_gameTime, 1000) {
 	         public void onTick(long msUntilFinished){
 
-	        	 gameTime -= 1000;
+	        	 _gameTime -= 1000;
 	             
 	         }
 	         public void onFinish(){
@@ -34,7 +34,7 @@ public class Countdown {
 	}
 	
 	public void draw(Canvas c){
-		c.drawText("Time left: " + (gameTime/1000), 15, 15, p);
+		c.drawText("Time left: " + (_gameTime/1000), 10, 25, _p);
 	}
 
 }

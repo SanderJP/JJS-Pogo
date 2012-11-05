@@ -13,18 +13,19 @@ import android.util.Log;
 public class GameInput implements SensorEventListener {
 
 	private Player _player;
-	private SensorManager sm;
-	private long lastMoveTime = System.currentTimeMillis();
-	private long freeToMoveTime;
+	private SensorManager _sm;
+	private long _lastMoveTime = System.currentTimeMillis();
+	private long _freeToMoveTime;
+	private long _moveDelay = 300;
 	
 	// Sensor data
-	private float a; 
-	private float b;
+	private float _a; 
+	private float _b;
 	
 	// Chaning movement data
-	int movementX;
-	int movementY;
-	int direction;
+	private int _movementX;
+	private int _movementY;
+	private int _direction;
 	
 	public GameInput(Player playerToControll) {
 		
@@ -35,43 +36,43 @@ public class GameInput implements SensorEventListener {
 		ContextHolder ch = ContextHolder.getInstance();
 		Activity mainContext = ch.getContext();
 		
-		sm = (SensorManager)mainContext.getSystemService(Context.SENSOR_SERVICE);
-		sm.registerListener(this, sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
+		_sm = (SensorManager)mainContext.getSystemService(Context.SENSOR_SERVICE);
+		_sm.registerListener(this, _sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
 	}
 	
 	@Override
 	public void onSensorChanged(SensorEvent sensorEvent) {
 		
 		// Prevent this event from running any further if the last move was within 500ms
-		freeToMoveTime = lastMoveTime + 500;
-		if(System.currentTimeMillis() < freeToMoveTime){
+		_freeToMoveTime = _lastMoveTime + _moveDelay;
+		if(System.currentTimeMillis() < _freeToMoveTime){
 			return;
 		}
 		
-		a = 0;
-		b = 0;
+		_a = 0;
+		_b = 0;
 		//float c = 0;
 		
 		if (sensorEvent.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
-			 a = sensorEvent.values[0];
-			 b = sensorEvent.values[1];
+			 _a = sensorEvent.values[0];
+			 _b = sensorEvent.values[1];
 			 //c = sensorEvent.values[2];
 		}
         
-        movementX = (int) a;
-        movementY = (int) b;
+        _movementX = (int) _a;
+        _movementY = (int) _b;
         
         // Determine direction
-        if(movementX > 1){
-        	direction = 1; // Left
-        } else if (movementX < -1){
-        	direction = 2; // Right 
-        } else if (movementY > 1){
-        	direction = 3; // Up
-        } else if (movementY < -1){
-        	direction = 4; // Down
+        if(_movementX > 1){
+        	_direction = 1; // Left
+        } else if (_movementX < -1){
+        	_direction = 2; // Right 
+        } else if (_movementY > 1){
+        	_direction = 3; // Up
+        } else if (_movementY < -1){
+        	_direction = 4; // Down
         } else {
-        	direction = -1; // None
+        	_direction = -1; // None
         }
         
         //Log.w("Movement", "X: " + movementX);
@@ -79,10 +80,10 @@ public class GameInput implements SensorEventListener {
         //Log.w("Movement", "Direction: " + direction);
         
         // Move the player in the correct direction (move will check for collisions)
-        _player.move(direction);
+        _player.move(_direction);
         
         // Keep track of when this move happened
-        lastMoveTime = System.currentTimeMillis();
+        _lastMoveTime = System.currentTimeMillis();
         
 	}
 	

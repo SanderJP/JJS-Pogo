@@ -12,8 +12,11 @@ public class AiPlayer extends Player {
 	final Handler handler = new Handler();
 	Timer t = new Timer();
 	
-	int minLimit = 1;
-	int maxLimit = 4;
+	private int _minLimit = 1;
+	private int _maxLimit = 4;
+	
+	private int _moveInternal = 300; // Movement delay in ms
+	private int _delayBeforeFirstMove = 1500; // in ms
 	
 	public AiPlayer(int id, int teamId, Map<Integer, Tile> map, Integer color) {
 		super(id, teamId, map, color);
@@ -28,15 +31,15 @@ public class AiPlayer extends Player {
 	        public void run() {
 			handler.post(new Runnable() {
 					public void run() {
-						int goTo = minLimit + (int) (Math.random() * ((maxLimit - minLimit) + 1));
+						int goTo = _minLimit + (int) (Math.random() * ((_maxLimit - _minLimit) + 1));
 						self.move(goTo);
-						Log.w("AiPlayer", "AiP " + self._id + " moved to: " + goTo);
+						//Log.w("AiPlayer", "AiP " + self._id + " moved to: " + goTo);
 					}
 				});
 	        }
 	    };
 	        
-		t.scheduleAtFixedRate(moveTask, 2000, 500);
+		t.scheduleAtFixedRate(moveTask, _delayBeforeFirstMove, _moveInternal);
 		
 	}
 

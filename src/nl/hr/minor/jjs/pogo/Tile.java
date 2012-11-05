@@ -14,7 +14,11 @@ public class Tile {
 	private int _margin = 5;
 	
 	private int _color = Color.RED;
+	private int _defaultColor = Color.RED;
+
 	private Paint _paint = new Paint();
+	
+	private String _powerupType = "none";
 	
 	public Tile(int id) {
 		// get row position first
@@ -41,6 +45,14 @@ public class Tile {
 		_color = c;
 	}
 	
+	public int getColor(){
+		return _color;
+	}
+	
+	public int getDefaultColor(){
+		return _defaultColor;
+	}
+	
 	public int getX(){
 		return _posX;
 	}
@@ -48,4 +60,13 @@ public class Tile {
 	public int getY(){
 		return _posY;
 	}
+	
+	public void setPowerupType(String pu){
+		_powerupType = pu;
+	}
+	
+	public String getPowerupType(){
+		return _powerupType;
+	}
+	
 }

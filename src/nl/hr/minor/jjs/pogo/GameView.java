@@ -14,8 +14,9 @@ public class GameView extends View {
 	private Map<Integer, Tile> _tiles = new Hashtable<Integer, Tile>();
 	private Map<Integer, Player> _playerList = new Hashtable<Integer, Player>();
 	
-	Countdown cd;
-
+	private Countdown _cd;
+	private ScoreDisplay _sd;
+	
 	public GameView(Context context) {
 		super(context);
 		
@@ -52,9 +53,14 @@ public class GameView extends View {
         aip3.startAi();
         
         // Show level countdown
-        cd = new Countdown();
+        _cd = new Countdown();
         
-        // Todo: Generate random 'check-ins' (get points for tiles in your color) and powerups (optional)
+        // Create PowerupManager - Generate random 'check-ins' (get points for tiles in your color) and powerups (optional)
+        PowerupManager pum = new PowerupManager(_tiles);
+        pum.start();
+        
+        // Display user scores
+        _sd = new ScoreDisplay(_playerList);
         
 		
 	}
@@ -75,7 +81,10 @@ public class GameView extends View {
 		}
 		
 		// Draw countdown timer
-		cd.draw(canvas);
+		_cd.draw(canvas);
+		
+		// Draw ScoreDisplay
+		_sd.draw(canvas);
 		
 		// Invalidate the view (redraw)
 		invalidate();
