@@ -16,6 +16,7 @@ public class Player {
 	private int _name; // Optional (may be used later)
 	private Map<Integer, Tile> _map;
 	public int _colorFill = Color.GREEN;
+	private GameView _gv;
 	
 	private int _size = 50;
 	private int _margin = 5;
@@ -36,9 +37,13 @@ public class Player {
 		_colorFill = color;
 		_score = 0;
 	}
+	
+	public void setGameView(GameView gv) {
+		_gv = gv;
+	}
 
 	public void move(int direction){
-		int _tmpOldTile = _currentTile;
+		int tmpOldTile = _currentTile;
 		
 		if(direction == 1){ // Left
 			_currentTile--;
@@ -51,7 +56,7 @@ public class Player {
         }
 		
 		// Check if this map tile exists
-		if(_map.containsKey(_currentTile)){
+		if(_map.containsKey(_currentTile) && direction != -1){
     		_map.get(_currentTile).setColor(_colorFill);
     		
     		// Change player self
@@ -79,10 +84,11 @@ public class Player {
 	    		_map.get(_currentTile).setColor(_map.get(_currentTile).getDefaultColor());
 	    		
     		}
-    		
+//    		Log.w("game","PLAYER ("+_id+") MOVED with color: "+_colorFill);
+    		_gv.checkForFill(_colorFill);
     	} else {
     		// Player tries to go out of map bounds; set currenTile back to what it was
-    		_currentTile = _tmpOldTile;
+    		_currentTile = tmpOldTile;
     	}
 		
 		// Todo: Optional collision detection between all players
