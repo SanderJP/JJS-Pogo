@@ -120,7 +120,6 @@ public class GameView extends View {
 					directions.add(-1);
 					// set out the path finder and get back a path
 					pathFound = _tiles.get(id).checkNeighbours(directions, _tiles, currentColor, pathFound, tileHistory);
-//					Log.w("game","pathFound: "+pathFound);
 					for (int id2 : tileHistory) {
 						if (!_checkedTiles.contains(id2)){
 							_checkedTiles.add(id2);
@@ -128,7 +127,6 @@ public class GameView extends View {
 					}
 					// if first entry is -2, we have a path!
 					if (pathFound.get(0) == -2) {
-						//Log.w("game", "got it!");
 						fillIn(pathFound, color);
 					}
 				}
@@ -144,7 +142,6 @@ public class GameView extends View {
 	private void fillIn(List<Integer> pathFound, int color) {
 		// sort number low to high
 		Collections.sort(pathFound);
-//		Log.w("game", "sorted pathFound: "+pathFound);
 		boolean fill = false;
 		int tmpEndFill = -1;
 		// loop through tiles
@@ -156,14 +153,15 @@ public class GameView extends View {
 				} else if (tmpEndFill == -1) {
 					int min = (int) (Math.floor(id/10.0) * 10);
 					int max = (int) (Math.ceil(id/10.0) * 10);
+					if (max == id) {
+						max = id+10;
+					}
 					for (int id2 : pathFound) {
 						if (id != id2 && (id2 > min && id2 < max)) {
 							tmpEndFill = id2;
 						}
 					}
 					if (tmpEndFill != -1) {
-//						Log.w("game","startFill: "+id);
-//						Log.w("game","tmpEndFill: "+tmpEndFill);
 						fill = true;
 					}
 				}

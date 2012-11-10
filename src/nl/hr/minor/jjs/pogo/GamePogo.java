@@ -10,8 +10,10 @@ public class GamePogo extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        setContentView(new GameView(this));
+        // Set the current context (this) in the 'singleton' contextHolder.
+        ContextHolder ch = ContextHolder.getInstance();
+        ch.setContext(this);
         
+        setContentView(new GameView(this));
     }
-
 }

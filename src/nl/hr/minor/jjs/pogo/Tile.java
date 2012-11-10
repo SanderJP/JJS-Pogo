@@ -92,6 +92,9 @@ public class Tile {
 				if (tiles.get(id).getColor() == currentColor) {
 					// if the id was somewhere else in the history: we have a path!
 					if (currentPath.contains(id)) {
+						if (currentPath.size() <= 5) {
+							continue;
+						}
 						// record from the id we found again
 						boolean record = false;
 						// isolate the path
