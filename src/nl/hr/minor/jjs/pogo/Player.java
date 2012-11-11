@@ -58,9 +58,9 @@ public class Player {
 			_currentTile--;
 		}else if (direction == 2){ // Right
 			_currentTile++;
-        } else if (direction == 3){ // Up
+        } else if (direction == 3){ // Down
         	_currentTile+=10;
-        } else if (direction == 4){ // Down
+        } else if (direction == 4){ // Up
         	_currentTile-=10;
         }
 		
@@ -116,9 +116,9 @@ public class Player {
 				_currentTile--;
 			}else if (direction == 2){ // Right
 				_currentTile++;
-	        } else if (direction == 3){ // Up
+	        } else if (direction == 3){ // Down
 	        	_currentTile+=10;
-	        } else if (direction == 4){ // Down
+	        } else if (direction == 4){ // Up
 	        	_currentTile-=10;
 	        }
 			

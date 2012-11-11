@@ -49,19 +49,23 @@ public class GameView extends View {
 		
 		// Other 3 are computer controlled
         AiPlayer aip1 = new AiPlayer(2, 1, _tiles, Color.GREEN);
-//        AiPlayer aip2 = new AiPlayer(3, 2, _tiles, Color.YELLOW);
-//        AiPlayer aip3 = new AiPlayer(4, 2, _tiles, Color.MAGENTA);
+        AiPlayer aip2 = new AiPlayer(3, 2, _tiles, Color.YELLOW);
+        AiPlayer aip3 = new AiPlayer(4, 2, _tiles, Color.MAGENTA);
+        
+        // Add gameview to players
+        aip1.setGameView(this);
+        aip2.setGameView(this);
+        aip3.setGameView(this);
 
         // Add to playerlist and pass the gameview
         _playerList.put(2, aip1);
-        _playerList.get(2).setGameView(this);
-//        _playerList.put(3, aip2);
-//        _playerList.put(4, aip3);
+        _playerList.put(3, aip2);
+        _playerList.put(4, aip3);
 
-//        // Start Ai for the AiPlayers
+        // Start Ai for the AiPlayers
         aip1.startAi();
-//        aip2.startAi();
-//        aip3.startAi();
+        aip2.startAi();
+        aip3.startAi();
         
         // Show level countdown
         _cd = new Countdown();

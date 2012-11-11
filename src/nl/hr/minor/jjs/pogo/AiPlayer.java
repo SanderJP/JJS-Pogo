@@ -16,7 +16,7 @@ public class AiPlayer extends Player {
 	private int _maxLimit = 4;
 	
 	private int _moveInternal = 300; // Movement delay in ms
-	private int _delayBeforeFirstMove = 1500; // in ms
+	private int _delayBeforeFirstMove = _moveInternal*3; // in ms
 	
 	public AiPlayer(int id, int teamId, Map<Integer, Tile> map, Integer color) {
 		super(id, teamId, map, color);
@@ -27,12 +27,12 @@ public class AiPlayer extends Player {
 		}
 		
 		if(id == 3){
-			this.moveTile(4,8); // 8 times down (bottom left corner)
+			this.moveTile(3,8); // 8 times down (bottom left corner)
 		}
 		
 		if(id == 4){
 			this.moveTile(2,8); // 8 times to right
-			this.moveTile(4,8); // 8 times down (bottom right corner)
+			this.moveTile(3,8); // 8 times down (bottom right corner)
 		}
 	}
 	
