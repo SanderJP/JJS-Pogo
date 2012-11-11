@@ -19,8 +19,8 @@ public class ScoreScreen extends Activity implements OnClickListener {
 		Intent intent = getIntent();
 		String scorep1 = intent.getStringExtra("score1");
 		String scorep2 = intent.getStringExtra("score2");
-		String scorep3 = intent.getStringExtra("score2");
-		String scorep4 = intent.getStringExtra("score2");
+		String scorep3 = intent.getStringExtra("score3");
+		String scorep4 = intent.getStringExtra("score4");
 		
 		String finalScores = "Scores: \n\n";
 		
