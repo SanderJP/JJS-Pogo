@@ -41,6 +41,10 @@ public class ScoreDisplay {
 			_scoreText += "Player " + _player._id + ": " + _player.getScore() + " - ";
 		}
 		
+		// Remove last 2 chars (- ) from scoreText
+		_scoreText = _scoreText.substring(0, _scoreText.length()-2);
+		
+		// Draw score
 		c.drawText(_scoreText, 10, 460, _p);
 	}
 	
