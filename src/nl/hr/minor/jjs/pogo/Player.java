@@ -23,10 +23,11 @@ public class Player {
 	
 	public int _posX = _size/2;
 	public int _posY = _size/2;
-	private int _currentTile = 1;
+	private int _currentTile = 0;
 	
 	private int _color = Color.BLACK;
 	private Paint _paint = new Paint();
+	private Paint _textPaint = new Paint();
 	
 	private String _powerupType = "";
 	
@@ -141,6 +142,11 @@ public class Player {
 		_paint.setColor(_color);
 		// draw it
 		cv.drawCircle(_posX, _posY, _size/2, _paint);
+		
+		// Draw playerId on his player circle
+		_textPaint.setColor(Color.WHITE);
+		_textPaint.setTextSize(20);
+		cv.drawText(""+_id, _posX - 5, _posY + 5, _textPaint);
 		
 	}
 	

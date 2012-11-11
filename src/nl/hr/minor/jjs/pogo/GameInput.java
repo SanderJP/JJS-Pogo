@@ -73,11 +73,12 @@ public class GameInput implements SensorEventListener {
         	_direction = 4; // Down
         } else {
         	_direction = -1; // None
+        	return;
         }
         
-        //Log.w("Movement", "X: " + movementX);
-        //Log.w("Movement", "Y: " + movementY);
-        //Log.w("Movement", "Direction: " + direction);
+        //Log.w("Movement", "X: " + _movementX);
+        //Log.w("Movement", "Y: " + _movementY);
+        //Log.w("Movement", "Direction: " + _direction);
         
         // Move the player in the correct direction (move will check for collisions)
         _player.move(_direction);
