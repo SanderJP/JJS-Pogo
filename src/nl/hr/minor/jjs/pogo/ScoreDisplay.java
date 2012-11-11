@@ -1,9 +1,10 @@
 package nl.hr.minor.jjs.pogo;
 
-import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.Map;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -14,10 +15,12 @@ public class ScoreDisplay {
 	private Map<Integer, Player> _playerlist;
 	private String _scoreText;
 	private Player _player;
+	private Activity _gameActivity;
 	
-	public ScoreDisplay(Map<Integer, Player> playerlist) {
+	public ScoreDisplay(Map<Integer, Player> playerlist, Context mainScreen) {
 		
 		_playerlist = playerlist;
+		_gameActivity = (Activity) mainScreen;
 		
 		_p = new Paint();
 		_p.setColor(Color.WHITE);
@@ -39,6 +42,19 @@ public class ScoreDisplay {
 		}
 		
 		c.drawText(_scoreText, 10, 460, _p);
+	}
+	
+	public void showFinalScore(){
+		Intent h = new Intent(ContextHolder.getInstance().getContext(), ScoreScreen.class);
+		
+		for(Integer playerIndex : _playerlist.keySet()){
+			
+			_player = _playerlist.get(playerIndex);
+			h.putExtra("score"+_player._id, Integer.toString(_player.getScore()));
+		}
+		
+		_gameActivity.finish();
+		ContextHolder.getInstance().getContext().startActivity(h);
 	}
 
 }

@@ -1,5 +1,8 @@
 package nl.hr.minor.jjs.pogo;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -10,8 +13,11 @@ public class Countdown {
 	private int _gameTime = 90000;
 	private Paint _p;
 	private CountDownTimer _cdt;
+	private ScoreDisplay _sd;
 	
-	public Countdown() {
+	public Countdown(ScoreDisplay sd) {
+		
+		_sd = sd;
 		
 		_p = new Paint();
 		_p.setColor(Color.WHITE);
@@ -28,6 +34,7 @@ public class Countdown {
 	         public void onFinish(){
 	        	 // Do something when game is finished
 	        	 // (Calculate score etc.)
+	        	 _sd.showFinalScore();
 	        	 
 	         }
 	      }.start();

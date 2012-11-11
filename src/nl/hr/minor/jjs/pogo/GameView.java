@@ -67,15 +67,16 @@ public class GameView extends View {
         aip2.startAi();
         aip3.startAi();
         
+        
+        // Display user scores
+        _sd = new ScoreDisplay(_playerList, context);
+        
         // Show level countdown
-        _cd = new Countdown();
+        _cd = new Countdown(_sd);
         
         // Create PowerupManager - Generate random 'check-ins' (get points for tiles in your color) and powerups (optional)
         _pum = new PowerupManager(_tiles);
         _pum.start();
-        
-        // Display user scores
-        _sd = new ScoreDisplay(_playerList);
         
 		
 	}
