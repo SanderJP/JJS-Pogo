@@ -21,8 +21,8 @@ public class Player {
 	private int _size = 50;
 	private int _margin = 5;
 	
-	private int _posX = _size/2;
-	private int _posY = _size/2;
+	public int _posX = _size/2;
+	public int _posY = _size/2;
 	private int _currentTile = 1;
 	
 	private int _color = Color.BLACK;
@@ -96,6 +96,43 @@ public class Player {
 		
 	}
 	
+	// Used for intial setup of player positions (exluded powerups and tile color change)
+	public void moveTile(int direction, int numMovement){
+		int l = 1;
+		while( l <= numMovement){
+			
+			int tmpOldTile = _currentTile;
+			
+			if(direction == 1){ // Left
+				_currentTile--;
+			}else if (direction == 2){ // Right
+				_currentTile++;
+	        } else if (direction == 3){ // Up
+	        	_currentTile+=10;
+	        } else if (direction == 4){ // Down
+	        	_currentTile-=10;
+	        }
+			
+			// Check if this map tile exists
+			if(_map.containsKey(_currentTile) && direction != -1){
+	    		
+	    		// Change player self
+	    		int tileX = _map.get(_currentTile).getX();
+	    		int tileY = _map.get(_currentTile).getY();
+	    		
+	    		// Calculate player position on current tile
+	    		_posX = (tileX*_size) + (_margin*tileX) + (_size/2);
+	    		_posY = (tileY*_size) + (_margin*tileY) + (_size/2);
+			} else {
+	    		// Player tries to go out of map bounds; set currenTile back to what it was
+	    		_currentTile = tmpOldTile;
+	    	}
+			
+			l++;
+		}
+		
+	}
+	
 	public void draw(Canvas cv){
 		
 		int posX = (_posX > 0) ? (_posX*_size)+(_margin*_posX) : _posX;
@@ -122,6 +159,10 @@ public class Player {
 	
 	public int getDrawColor(){
 		return _colorFill;
+	}
+	
+	public int getFullTileSize(){
+		return (_size + _margin);
 	}
 	
 }

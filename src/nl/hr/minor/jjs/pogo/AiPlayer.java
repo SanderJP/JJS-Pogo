@@ -20,6 +20,20 @@ public class AiPlayer extends Player {
 	
 	public AiPlayer(int id, int teamId, Map<Integer, Tile> map, Integer color) {
 		super(id, teamId, map, color);
+		
+		// Set start corner for each player
+		if(id == 2){
+			this.moveTile(2,8); // 8 times to right (top right corner)
+		}
+		
+		if(id == 3){
+			this.moveTile(4,8); // 8 times down (bottom left corner)
+		}
+		
+		if(id == 4){
+			this.moveTile(2,8); // 8 times to right
+			this.moveTile(4,8); // 8 times down (bottom right corner)
+		}
 	}
 	
 	public void startAi(){
