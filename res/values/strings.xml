@@ -4,5 +4,6 @@
     <string name="hello">Hello World, JJSPogoActivity!</string>
     <string name="app_name">JJS-Pogo</string>
     <string name="btn_play_again">Play Again</string>
+    <string name="menuItem_flipOrientation">Flip screen</string>
 
 </resources>
