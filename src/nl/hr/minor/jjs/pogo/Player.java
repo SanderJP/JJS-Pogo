@@ -31,6 +31,8 @@ public class Player {
 	
 	private String _powerupType = "";
 	
+	private boolean _playerPaused = false;
+	
 	public Player(int id, int teamId, Map<Integer, Tile> map, Integer color){
 		_id = id;
 		_teamId = teamId;
@@ -44,6 +46,12 @@ public class Player {
 	}
 
 	public void move(int direction){
+		
+		// If game is paused, stop any movement
+		if(_playerPaused){
+			return;
+		}
+		
 		int tmpOldTile = _currentTile;
 		
 		if(direction == 1){ // Left
@@ -169,6 +177,14 @@ public class Player {
 	
 	public int getFullTileSize(){
 		return (_size + _margin);
+	}
+	
+	public void pause(){
+		_playerPaused = true;
+	}
+	
+	public void resume(){
+		_playerPaused = false;
 	}
 	
 }

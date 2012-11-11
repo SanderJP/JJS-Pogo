@@ -93,5 +93,13 @@ public class GameInput implements SensorEventListener {
 		// TODO Auto-generated method stub
 
 	}
+	
+	public void pause(){
+		_sm.unregisterListener(this, _sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER));
+	}
+	
+	public void resume(){
+		_sm.registerListener(this, _sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_GAME);
+	}
 
 }

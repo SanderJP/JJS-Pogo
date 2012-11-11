@@ -26,6 +26,8 @@ public class PowerupManager {
 	// Define interval for different powerups/boxes
 	private int intervalCheckBox = 6000; // Every 8 seconds -> 15 each game (90 seconds)
 	
+	private boolean _gamePaused = false;
+	
 	public PowerupManager(Map<Integer, Tile> map) {
 		
 		_tiles = map;
@@ -41,6 +43,11 @@ public class PowerupManager {
 			handler.post(new Runnable() {
 					public void run() {
 
+						// If game is paused, don't add powerups
+						if(_gamePaused){
+							return;
+						}
+						
 						// Find a random tile to set a powerup
 						Random random = new Random();
 						ArrayList<Integer> keys = new ArrayList<Integer>(_tiles.keySet());
@@ -107,6 +114,14 @@ public class PowerupManager {
 		
 		// In any other case... still give 1 point.
 		return 1;
+	}
+	
+	public void pause(){
+		_gamePaused = true;
+	}
+	
+	public void resume(){
+		_gamePaused = false;
 	}
 
 }

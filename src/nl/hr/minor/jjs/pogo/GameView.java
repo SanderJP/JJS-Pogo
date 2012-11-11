@@ -22,6 +22,9 @@ public class GameView extends View {
 	private Countdown _cd;
 	private ScoreDisplay _sd;
 	
+	private GameInput _gi;
+	private PowerupManager _pum;
+	
 	public GameView(Context context) {
 		super(context);
 		
@@ -42,7 +45,7 @@ public class GameView extends View {
 		_playerList.get(1).setGameView(this);
 		
 		// Link the GameInput to the first player
-        GameInput gi = new GameInput(_playerList.get(1));
+        _gi = new GameInput(_playerList.get(1));
 		
 		// Other 3 are computer controlled
         AiPlayer aip1 = new AiPlayer(2, 1, _tiles, Color.GREEN);
@@ -64,8 +67,8 @@ public class GameView extends View {
         _cd = new Countdown();
         
         // Create PowerupManager - Generate random 'check-ins' (get points for tiles in your color) and powerups (optional)
-        PowerupManager pum = new PowerupManager(_tiles);
-        pum.start();
+        _pum = new PowerupManager(_tiles);
+        _pum.start();
         
         // Display user scores
         _sd = new ScoreDisplay(_playerList);
@@ -173,5 +176,46 @@ public class GameView extends View {
 				_tiles.get(id).setColor(color);
 			}
 		}
+	}
+	
+	public void pause(){
+		
+		// Stop players moving
+		Player player;
+		for(Integer playerIndex : _playerList.keySet()){
+			player = _playerList.get(playerIndex);
+			player.pause(); // Pause
+		}
+		
+		// Pause Gameinput
+		_gi.pause();
+		
+		// Pause Countdown
+		_cd.pause();
+		
+		// Pause PowerUpManger
+		_pum.pause();
+
+	}
+	
+	
+	public void resume(){
+		
+		// Stop players moving
+		Player player;
+		for(Integer playerIndex : _playerList.keySet()){
+			player = _playerList.get(playerIndex);
+			player.resume(); // Resume
+		}
+		
+		// Resume Gameinput
+		_gi.resume();
+		
+		// Resume countdown
+		_cd.resume();
+		
+		// Resume PowerUpManager
+		_pum.resume();
+
 	}
 }

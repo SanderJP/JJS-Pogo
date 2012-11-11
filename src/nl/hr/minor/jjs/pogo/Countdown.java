@@ -9,6 +9,7 @@ public class Countdown {
 
 	private int _gameTime = 90000;
 	private Paint _p;
+	private CountDownTimer _cdt;
 	
 	public Countdown() {
 		
@@ -18,7 +19,7 @@ public class Countdown {
 		_p.setTextSize(20);
 		//p.setStyle(style);
 		
-		new CountDownTimer(_gameTime, 1000) {
+		_cdt = new CountDownTimer(_gameTime, 1000) {
 	         public void onTick(long msUntilFinished){
 
 	        	 _gameTime -= 1000;
@@ -35,6 +36,14 @@ public class Countdown {
 	
 	public void draw(Canvas c){
 		c.drawText("Time left: " + (_gameTime/1000), 10, 25, _p);
+	}
+	
+	public void pause(){
+		_cdt.cancel();
+	}
+	
+	public void resume(){
+		_cdt.start();
 	}
 
 }
